@@ -19,9 +19,12 @@ fi
 # Configure the Zabbix Server and Agent
 echo "Configuring Zabbix Server"
 rm ${OPENSHIFT_DATA_DIR}zabbix/etc/zabbix_server.conf
-ln -s ${OPENSHIFT_REPO_DIR}conf/zabbix_server.conf ${OPENSHIFT_DATA_DIR}zabbix/etc/zabbix_server.conf
+eval echo "\"$(cat <<EOF_$RANDOM
+$(<${OPENSHIFT_REPO_DIR}conf/zabbix_server.conf)
+EOF_$RANDOM
+)\"" >> ${OPENSHIFT_DATA_DIR}zabbix/etc/zabbix_server.conf
+
 echo "Configuring Zabbix Agent"
 rm ${OPENSHIFT_DATA_DIR}zabbix/etc/zabbix_agentd.conf
 ln -s ${OPENSHIFT_REPO_DIR}conf/zabbix_agentd.conf ${OPENSHIFT_DATA_DIR}zabbix/etc/zabbix_agentd.conf
-
 
