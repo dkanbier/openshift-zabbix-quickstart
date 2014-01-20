@@ -21,4 +21,7 @@ You can log in using the default Zabbix credentials:
 	Username: Admin
 	Password: zabbix
 
+Notes
+-----
 
+This is a testing quickstart and may break. It needs a lot of tidying up and I'm thinking of compiling the binaries and upload them instead of letting rhcloud handling compilation.
