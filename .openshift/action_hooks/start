@@ -1,8 +1,0 @@
-#!/bin/bash
-
-echo 
-echo "Starting Zabbix Server"
-${OPENSHIFT_DATA_DIR}zabbix/sbin/zabbix_server
-echo
-echo "Starting Zabbix Agent"
-${OPENSHIFT_DATA_DIR}zabbix/sbin/zabbix_agentd
