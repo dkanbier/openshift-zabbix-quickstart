@@ -12,8 +12,8 @@ $DB['PASSWORD'] = getenv('OPENSHIFT_MYSQL_DB_PASSWORD');
 // SCHEMA is relevant only for IBM_DB2 database
 $DB['SCHEMA'] = '';
 
-$ZBX_SERVER      = 'localhost';
-$ZBX_SERVER_PORT = '10051';
+$ZBX_SERVER      = getenv('OPENSHIFT_PHP_IP');
+$ZBX_SERVER_PORT = '15051';
 $ZBX_SERVER_NAME = '';
 
 $IMAGE_FORMAT_DEFAULT = IMAGE_FORMAT_PNG;
