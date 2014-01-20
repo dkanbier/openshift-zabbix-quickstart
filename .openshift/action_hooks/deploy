@@ -17,16 +17,9 @@ else
 fi
 
 # Configure 
-echo 
 echo "Configuring Zabbix Server"
-echo "ListenPort=15051" >> ${OPENSHIFT_DATA_DIR}zabbix/etc/zabbix_server.conf
-echo "ListenIP=${OPENSHIFT_PHP_IP}" >> ${OPENSHIFT_DATA_DIR}zabbix/etc/zabbix_server.conf
-echo
+ln -s ${OPENSHIFT_REPO_DIR}conf/zabbix_agentd.conf ${OPENSHIFT_DATA_DIR}zabbix/etc/zabbix_agentd.conf
+ln -s ${OPENSHIFT_REPO_DIR}conf/zabbix_server.conf ${OPENSHIFT_DATA_DIR}zabbix/etc/zabbix_server.conf
 echo "Configuring Zabbix Agent"
-echo "Server=${OPENSHIFT_PHP_IP}" >> ${OPENSHIFT_DATA_DIR}zabbix/etc/zabbix_agentd.conf
-echo "ListenPort=15050" >> ${OPENSHIFT_DATA_DIR}zabbix/etc/zabbix_agentd.conf
-echo "ListenIP=${OPENSHIFT_PHP_IP}" >> ${OPENSHIFT_DATA_DIR}zabbix/etc/zabbix_agentd.conf
-echo "ServerActive=${OPENSHIFT_PHP_IP}:15051" >> ${OPENSHIFT_DATA_DIR}zabbix/etc/zabbix_agentd.conf
-echo "SourceIP=${OPENSHIFT_PHP_IP}" >> ${OPENSHIFT_DATA_DIR}zabbix/etc/zabbix_agentd.conf
 
 
