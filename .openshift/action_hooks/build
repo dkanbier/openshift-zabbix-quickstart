@@ -13,6 +13,12 @@ tar -xzf ${OPENSHIFT_DATA_DIR}downloads/zabbix-2.2.1.tar.gz -C ${OPENSHIFT_DATA_
 # Create a location for the binaries
 mkdir -p ${OPENSHIFT_DATA_DIR}zabbix
 
+# Create a location for the logs
+mkdir -p ${OPENSHIFT_DATA_DIR}zabbix/log
+
+# Create a location for the PID file
+mkdir -p ${OPENSHIFT_DATA_DIR}zabbix/run
+
 # Run configure
 echo "Running ./configure"
 cd ${OPENSHIFT_DATA_DIR}zabbix-2.2.1
