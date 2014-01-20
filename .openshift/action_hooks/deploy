@@ -16,13 +16,13 @@ then
 	echo
 	echo "Database schema not found, adding it now."
 	echo "CREATING DB"
-	/usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" --password "$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" -P "$OPENSHIFT_MYSQL_DB_PORT" -e "create database $OPENSHIFT_APP_NAME character set utf8 collate utf8_bin;"
+	/usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -p "$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" -P "$OPENSHIFT_MYSQL_DB_PORT" -e "create database $OPENSHIFT_APP_NAME character set utf8 collate utf8_bin;"
 	echo "ADDING SCHEMA1"
-	/usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" --password "$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" -P "$OPENSHIFT_MYSQL_DB_PORT" "OPENSHIFT_APP_NAME" <  ${OPENSHIFT_DATA_DIR}zabbix-2.1.1/database/mysql/schema.sql
+	/usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -p "$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" -P "$OPENSHIFT_MYSQL_DB_PORT" "OPENSHIFT_APP_NAME" <  ${OPENSHIFT_DATA_DIR}zabbix-2.2.1/database/mysql/schema.sql
 	echo "ADDING SCHEMA2"
-	/usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" --password "$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" -P "$OPENSHIFT_MYSQL_DB_PORT" "OPENSHIFT_APP_NAME" <  ${OPENSHIFT_DATA_DIR}zabbix-2.1.1/database/mysql/images.sql
+	/usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -p "$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" -P "$OPENSHIFT_MYSQL_DB_PORT" "OPENSHIFT_APP_NAME" <  ${OPENSHIFT_DATA_DIR}zabbix-2.2.1/database/mysql/images.sql
 	echo "ADDING SCHEMA3"
-	/usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" --password "$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" -P "$OPENSHIFT_MYSQL_DB_PORT" "OPENSHIFT_APP_NAME" <  ${OPENSHIFT_DATA_DIR}zabbix-2.1.1/database/mysql/data.sql
+	/usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -p "$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" -P "$OPENSHIFT_MYSQL_DB_PORT" "OPENSHIFT_APP_NAME" <  ${OPENSHIFT_DATA_DIR}zabbix-2.2.1/database/mysql/data.sql
 else
 	echo "Database already configured."
 fi
