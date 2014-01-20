@@ -1,27 +1,44 @@
 #!/bin/bash
 
 # Download the latest Zabbix release
-echo "Downloading Zabbix 2.2.1"
+if [ ! -d ${OPENSHIFT_DATA_DIR}downloads ]
+then
+	mkdir -p ${OPENSHIFT_DATA_DIR}downloads
+fi 
 
-mkdir -p ${OPENSHIFT_DATA_DIR}downloads
-rm -rf ${OPENSHIFT_DATA_DIR}downloads/*
-wget --quiet -P ${OPENSHIFT_DATA_DIR}downloads http://sourceforge.net/projects/zabbix/files/ZABBIX%20Latest%20Stable/2.2.1/zabbix-2.2.1.tar.gz/download
+if [ ! -f ${OPENSHIFT_DATA_DIR}downloads/zabbix-2.2.1.tar.gz ]
+then
+	wget --quiet -P ${OPENSHIFT_DATA_DIR}downloads http://sourceforge.net/projects/zabbix/files/ZABBIX%20Latest%20Stable/2.2.1/zabbix-2.2.1.tar.gz/download
+	echo "Unpacking zabbix software"
+	tar -xzf ${OPENSHIFT_DATA_DIR}downloads/zabbix-2.2.1.tar.gz -C ${OPENSHIFT_DATA_DIR}/
+fi
 
-echo "Unpacking zabbix software"
-tar -xzf ${OPENSHIFT_DATA_DIR}downloads/zabbix-2.2.1.tar.gz -C ${OPENSHIFT_DATA_DIR}/
+# Make sure we have binaries 
+echo "Checking binaries"
+if [ ! -f ${OPENSHIFT_DATA_DIR}zabbx/sbin/zabbix_server ]
+then
 
-# Create a location for the binaries
-mkdir -p ${OPENSHIFT_DATA_DIR}zabbix
+	# Create a location for the binaries
+	mkdir -p ${OPENSHIFT_DATA_DIR}zabbix
+
+	# Running configure	
+	echo "Running ./configure"
+	cd ${OPENSHIFT_DATA_DIR}zabbix-2.2.1
+	./configure --prefix=${OPENSHIFT_DATA_DIR}zabbix --bindir=${OPENSHIFT_DATA_DIR}zabbix --enable-server --enable-agent --with-mysql --with-libcurl --with-libxml2 >/dev/null  2>&1
+
+	# Run make install
+	echo "Running make install"
+	make install >/dev/null 2>&1
+else
+	echo "Binaries found"
+fi
+
+# Symlink the binaries into place
+ln -s ${OPENSHIFT_DATA_DIR}zabbix/ ${OPENSHIFT_REPO_DIR}zabbix/
 
 # Create a location for the logs
-mkdir -p ${OPENSHIFT_DATA_DIR}zabbix/log
+mkdir -p ${OPENSHIFT_REPO_DIR}zabbix/log
 
 # Create a location for the PID file
-mkdir -p ${OPENSHIFT_DATA_DIR}zabbix/run
+mkdir -p ${OPENSHIFT_REPO_DIR}zabbix/run
 
-# Run configure
-echo "Running ./configure"
-cd ${OPENSHIFT_DATA_DIR}zabbix-2.2.1
-./configure --prefix=${OPENSHIFT_DATA_DIR}zabbix --bindir=${OPENSHIFT_DATA_DIR}zabbix --enable-server --enable-agent --with-mysql --with-libcurl --with-libxml2 >/dev/null  2>&1
-echo "Running make install"
-make install >/dev/null 2>&1

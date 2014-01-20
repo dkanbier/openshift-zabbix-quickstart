@@ -16,42 +16,25 @@ else
 	echo "Database already configured"
 fi
 
-# TESTING FOR JEMOEDER
-if [ -f ${OPENSHIFT_DATA_DIR}conf/jemoeder ]
-then
-	echo "${OPENSHIFT_DATA_DIR}conf/jemoeder IS GEVONDEN!"
-else
-	echo "OWNEE TOCH NIET DATA..."
-fi
-if [ -f ${OPENSHIFT_REPO_DIR}conf/jemoeder ]
-then
-	echo "${OPENSHIFT_REPO_DIR}conf/jemoeder IS GEVONDEN!"
-else
-	echo "OWNEE TOCH NIET REPO..."
-fi
-
-
 # Configure the Zabbix Server and Agent
 echo "Configuring Zabbix Server"
-rm ${OPENSHIFT_DATA_DIR}zabbix/etc/zabbix_server.conf
 eval echo "\"$(cat <<EOF_$RANDOM
 $(<${OPENSHIFT_REPO_DIR}conf/zabbix_server.conf)
 EOF_$RANDOM
-)\"" >> ${OPENSHIFT_DATA_DIR}zabbix/etc/zabbix_server.conf
+)\"" >> ${OPENSHIFT_REPO_DIR}zabbix/etc/zabbix_server.conf
 
 echo "Configuring Zabbix Agent"
-rm ${OPENSHIFT_DATA_DIR}zabbix/etc/zabbix_agentd.conf
 eval echo "\"$(cat <<EOF_$RANDOM
 $(<${OPENSHIFT_REPO_DIR}conf/zabbix_agentd.conf)
 EOF_$RANDOM
-)\"" >> ${OPENSHIFT_DATA_DIR}zabbix/etc/zabbix_agentd.conf
+)\"" >> ${OPENSHIFT_REPO_DIR}zabbix/etc/zabbix_agentd.conf
 
 # Restart Zabbix Server and Agent
 echo "Restarting Zabbix Server"
 killall -9 zabbix_server
 sleep 5
-${OPENSHIFT_DATA_DIR}zabbix/sbin/zabbix_server
+${OPENSHIFT_REPO_DIR}zabbix/sbin/zabbix_server
 echo "Restarting Zabbix Agent"
 killall -9 zabbix_agentd
 sleep 5
-${OPENSHIFT_DATA_DIR}zabbix/sbin/zabbix_agentd
+${OPENSHIFT_REPO_DIR}zabbix/sbin/zabbix_agentd
