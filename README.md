@@ -25,3 +25,5 @@ Notes
 -----
 
 This is a testing quickstart and may break. It needs a lot of tidying up and I'm thinking of compiling the binaries and upload them instead of letting rhcloud handling compilation.
+
+The default port numbers have been increased by 5000 because otherwise they conflict with OpenShift's reserved ports.
