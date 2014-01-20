@@ -5,8 +5,8 @@ echo "Download and install the latest stable version of Zabbix"
 echo
 
 mkdir -p ${OPENSHIFT_DATA_DIR}downloads
-wget -P ${OPENSHIFT_DATA_DIR}download http://sourceforge.net/projects/zabbix/files/ZABBIX%20Latest%20Stable/2.2.1/zabbix-2.2.1.tar.gz/download
-tar -xzf zabbix-2.2.1.tar.gz
+wget -P ${OPENSHIFT_DATA_DIR}downloads http://sourceforge.net/projects/zabbix/files/ZABBIX%20Latest%20Stable/2.2.1/zabbix-2.2.1.tar.gz/download
+tar -xzf ${OPENSHIFT_DATA_DIR}downloads/zabbix-2.2.1.tar.gz
 
 
 # Confirm the database exists, if not create it
@@ -15,9 +15,9 @@ then
 	echo
 	echo "Database schema not found, adding it now."
 	/usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" --password "$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" -P "$OPENSHIFT_MYSQL_DB_PORT" -e "create database $OPENSHIFT_APP_NAME character set utf8 collate utf8_bin;"
-	/usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" --password "$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" -P "$OPENSHIFT_MYSQL_DB_PORT" "OPENSHIFT_APP_NAME" <  $OPENSHIFT_DATA_DIR/database/mysql/schema.sql
-	/usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" --password "$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" -P "$OPENSHIFT_MYSQL_DB_PORT" "OPENSHIFT_APP_NAME" <  $OPENSHIFT_DATA_DIR/database/mysql/images.sql
-	/usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" --password "$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" -P "$OPENSHIFT_MYSQL_DB_PORT" "OPENSHIFT_APP_NAME" <  $OPENSHIFT_DATA_DIR/database/mysql/data.sql
+	/usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" --password "$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" -P "$OPENSHIFT_MYSQL_DB_PORT" "OPENSHIFT_APP_NAME" <  $OPENSHIFT_DATA_DIR/zabbix-2.1.1/database/mysql/schema.sql
+	/usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" --password "$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" -P "$OPENSHIFT_MYSQL_DB_PORT" "OPENSHIFT_APP_NAME" <  $OPENSHIFT_DATA_DIR/zabbix-2.1.1/database/mysql/images.sql
+	/usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" --password "$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" -P "$OPENSHIFT_MYSQL_DB_PORT" "OPENSHIFT_APP_NAME" <  $OPENSHIFT_DATA_DIR/zabbix-2.1.1/database/mysql/data.sql
 else
 	echo "Database already configured."
 fi
