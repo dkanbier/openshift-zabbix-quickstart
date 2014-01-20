@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Confirm the database exists, if not create it
-if ! /usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -p"$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" -P "$OPENSHIFT_MYSQL_DB_PORT" -e "use "$OPENSHIFT_APP_NAME"" > /dev/null 2>&1
+if ! /usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -p"$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" -P "$OPENSHIFT_MYSQL_DB_PORT" -e "select * from users;" "$OPENSHIFT_APP_NAME"> /dev/null 2>&1
 then
 	echo
-	echo "Database not found, creating it now."
+	echo "Database schema not yet added, adding now"
 	/usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -p"$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" -P "$OPENSHIFT_MYSQL_DB_PORT" -e "create database $OPENSHIFT_APP_NAME character set utf8 collate utf8_bin;"
 	echo "Adding schema.sql"
 	/usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -p"$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" -P "$OPENSHIFT_MYSQL_DB_PORT" "$OPENSHIFT_APP_NAME" < ${OPENSHIFT_DATA_DIR}zabbix-2.2.1/database/mysql/schema.sql
@@ -13,7 +13,7 @@ then
 	echo "Adding data.sql"
 	/usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -p"$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" -P "$OPENSHIFT_MYSQL_DB_PORT" "$OPENSHIFT_APP_NAME" < ${OPENSHIFT_DATA_DIR}zabbix-2.2.1/database/mysql/data.sql
 else
-	echo "Database already configured."
+	echo "Database already configured"
 fi
 
 # Configure the Zabbix Server and Agent
