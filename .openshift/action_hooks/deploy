@@ -26,5 +26,7 @@ EOF_$RANDOM
 
 echo "Configuring Zabbix Agent"
 rm ${OPENSHIFT_DATA_DIR}zabbix/etc/zabbix_agentd.conf
-ln -s ${OPENSHIFT_REPO_DIR}conf/zabbix_agentd.conf ${OPENSHIFT_DATA_DIR}zabbix/etc/zabbix_agentd.conf
-
+eval echo "\"$(cat <<EOF_$RANDOM
+$(<${OPENSHIFT_REPO_DIR}conf/zabbix_agentd.conf)
+EOF_$RANDOM
+)\"" >> ${OPENSHIFT_DATA_DIR}zabbix/etc/zabbix_agentd.conf
