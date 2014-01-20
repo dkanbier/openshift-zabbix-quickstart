@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Download the latest Zabbix release
+echo "Downloading Zabbix 2.2.1"
+echo
+
+mkdir -p ${OPENSHIFT_DATA_DIR}downloads
+rm -rf ${OPENSHIFT_DATA_DIR}downloads/*
+wget -P ${OPENSHIFT_DATA_DIR}downloads http://sourceforge.net/projects/zabbix/files/ZABBIX%20Latest%20Stable/2.2.1/zabbix-2.2.1.tar.gz/download
+
+echo 
+echo "Untar"
+tar -xzf ${OPENSHIFT_DATA_DIR}downloads/zabbix-2.2.1.tar.gz -C ${OPENSHIFT_DATA_DIR}/
+
+# Create a location for the binaries
+mkdir -p ${OPENSHIFT_DATA_DIR}zabbix
+
+# Run configure
+cd ${OPENSHIFT_DATA_DIR}zabbix-2.2.1
+./configure --prefix=${OPENSHIFT_DATA_DIR}zabbix --bindir=${OPENSHIFT_DATA_DIR}zabbix --enable-server --enable-agent --with-mysql --with-libcurl --with-libxml2
+make install
