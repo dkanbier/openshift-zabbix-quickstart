@@ -15,7 +15,7 @@ fi
 
 # Make sure we have binaries 
 echo "Checking binaries"
-if [ ! -f ${OPENSHIFT_DATA_DIR}zabbx/sbin/zabbix_server ]
+if [ ! -f ${OPENSHIFT_DATA_DIR}zabbix/sbin/zabbix_server ]
 then
 
 	# Create a location for the binaries
@@ -34,7 +34,7 @@ else
 fi
 
 # Symlink the binaries into place
-ln -s ${OPENSHIFT_DATA_DIR}zabbix/ ${OPENSHIFT_REPO_DIR}zabbix/
+ln -sf ${OPENSHIFT_DATA_DIR}zabbix/ ${OPENSHIFT_REPO_DIR}/zabbix
 
 # Create a location for the logs
 mkdir -p ${OPENSHIFT_REPO_DIR}zabbix/log
