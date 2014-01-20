@@ -30,3 +30,13 @@ eval echo "\"$(cat <<EOF_$RANDOM
 $(<${OPENSHIFT_REPO_DIR}conf/zabbix_agentd.conf)
 EOF_$RANDOM
 )\"" >> ${OPENSHIFT_DATA_DIR}zabbix/etc/zabbix_agentd.conf
+
+# Restart Zabbix Server and Agent
+echo "Restarting Zabbix Server"
+killall -9 zabbix_server
+sleep 5
+${OPENSHIFT_DATA_DIR}zabbix/sbin/zabbix_server
+echo "Restarting Zabbix Agent"
+killall -9 zabbix_agentd
+sleep 5
+${OPENSHIFT_DATA_DIR}zabbix/sbin/zabbix_agentd

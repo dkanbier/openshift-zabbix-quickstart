@@ -1,6 +1,0 @@
-#!/bin/bash
-
-echo "Stopping Zabbix Server"
-killall -9 zabbix_server
-echo "Stopping Zabbix Agent"
-killall -9 zabbix_agentd
