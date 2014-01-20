@@ -16,6 +16,21 @@ else
 	echo "Database already configured"
 fi
 
+# TESTING FOR JEMOEDER
+if -e ${OPENSHIFT_DATA_DIR}conf/jemoeder
+then
+	echo "${OPENSHIFT_DATA_DIR}conf/jemoeder IS GEVONDEN!"
+else
+	echo "OWNEE TOCH NIET DATA..."
+fi
+if -e ${OPENSHIFT_REPO_DIR}conf/jemoeder
+then
+	echo "${OPENSHIFT_REPO_DIR}conf/jemoeder IS GEVONDEN!"
+else
+	echo "OWNEE TOCH NIET REPO..."
+fi
+
+
 # Configure the Zabbix Server and Agent
 echo "Configuring Zabbix Server"
 rm ${OPENSHIFT_DATA_DIR}zabbix/etc/zabbix_server.conf
