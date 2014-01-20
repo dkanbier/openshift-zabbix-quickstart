@@ -1,3 +1,14 @@
+
+# Download the latest Zabbix release
+
+echo "Download and install the latest stable version of Zabbix"
+echo
+
+mkdir -p ${OPENSHIFT_DATA_DIR}downloads
+wget -P ${OPENSHIFT_DATA_DIR}download http://sourceforge.net/projects/zabbix/files/ZABBIX%20Latest%20Stable/2.2.1/zabbix-2.2.1.tar.gz/download
+tar -xzf zabbix-2.2.1.tar.gz
+
+
 # Confirm the database exists, if not create it
 if ! /usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" --password "$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" -P "$OPENSHIFT_MYSQL_DB_PORT" -e "select * from users;" "$OPENSHIFT_APP_NAME"
 then
