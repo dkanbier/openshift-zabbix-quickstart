@@ -17,13 +17,13 @@ else
 fi
 
 # TESTING FOR JEMOEDER
-if -e ${OPENSHIFT_DATA_DIR}conf/jemoeder
+if [ -f ${OPENSHIFT_DATA_DIR}conf/jemoeder ]
 then
 	echo "${OPENSHIFT_DATA_DIR}conf/jemoeder IS GEVONDEN!"
 else
 	echo "OWNEE TOCH NIET DATA..."
 fi
-if -e ${OPENSHIFT_REPO_DIR}conf/jemoeder
+if [ -f ${OPENSHIFT_REPO_DIR}conf/jemoeder ]
 then
 	echo "${OPENSHIFT_REPO_DIR}conf/jemoeder IS GEVONDEN!"
 else
