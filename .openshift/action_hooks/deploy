@@ -1,6 +1,6 @@
 #!/bin/bash
-# Download the latest Zabbix release
 
+# Download the latest Zabbix release
 echo "Download and install the latest stable version of Zabbix"
 echo
 
