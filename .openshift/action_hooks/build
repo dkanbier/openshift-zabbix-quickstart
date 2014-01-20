@@ -21,6 +21,14 @@ then
 	# Create a location for the binaries
 	mkdir -p ${OPENSHIFT_DATA_DIR}zabbix
 
+	# Create a location for the logs and clean
+	mkdir -p ${OPENSHIFT_DATA_DIR}zabbix/log
+	rm -rf ${OPENSHIFT_DATA_DIR}zabbix/log/*
+
+	# Create a location for the PID file
+	mkdir -p ${OPENSHIFT_DATA_DIR}zabbix/run
+	rm -rf ${OPENSHIFT_DATA_DIR}zabbix/run/*
+
 	# Running configure	
 	echo "Running ./configure"
 	cd ${OPENSHIFT_DATA_DIR}zabbix-2.2.1
@@ -35,10 +43,4 @@ fi
 
 # Symlink the binaries into place
 ln -sf ${OPENSHIFT_DATA_DIR}zabbix/ ${OPENSHIFT_REPO_DIR}/zabbix
-
-# Create a location for the logs
-mkdir -p ${OPENSHIFT_REPO_DIR}zabbix/log
-
-# Create a location for the PID file
-mkdir -p ${OPENSHIFT_REPO_DIR}zabbix/run
 
