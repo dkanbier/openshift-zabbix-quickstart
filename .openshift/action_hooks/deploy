@@ -6,7 +6,7 @@ echo
 
 mkdir -p ${OPENSHIFT_DATA_DIR}downloads
 wget -P ${OPENSHIFT_DATA_DIR}downloads http://sourceforge.net/projects/zabbix/files/ZABBIX%20Latest%20Stable/2.2.1/zabbix-2.2.1.tar.gz/download
-tar -xzf ${OPENSHIFT_DATA_DIR}downloads/zabbix-2.2.1.tar.gz
+tar -xzf ${OPENSHIFT_DATA_DIR}downloads/zabbix-2.2.1.tar.gz ${OPENSHIFT_DATA_DIR}
 
 
 # Confirm the database exists, if not create it
