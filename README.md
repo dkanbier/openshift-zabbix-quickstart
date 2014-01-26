@@ -18,6 +18,7 @@ That's it, you can now checkout your application at:
 	http://zabbix-$yournamespace.rhcloud.com
 
 You can log in using the default Zabbix credentials:
+
 	Username: Admin
 	Password: zabbix
 
