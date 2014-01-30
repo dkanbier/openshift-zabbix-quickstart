@@ -11,7 +11,7 @@ Create an account at http://openshift.redhat.com/ and install the client tools (
 
 Create a PHP application with MySQL support
 
-	rhc app create zabbix php-5 mysql-5 --from-code=https://github.com/dkanbier/openshift-zabbix-quickstart
+	rhc app create zabbix php-5.3 mysql-5.1 --from-code=https://github.com/dkanbier/openshift-zabbix-quickstart
 
 That's it, you can now checkout your application at:
 
