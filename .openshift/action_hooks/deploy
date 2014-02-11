@@ -15,7 +15,7 @@ else
 fi
 
 # Creating directories
-mkdir -p ${OPENSHIFT_REPO_DIR}zabbix/etc/zabbix_agentd.d
+mkdir -p ${OPENSHIFT_REPO_DIR}zabbix/etc/zabbix_agentd.conf.d
 mkdir -p ${OPENSHIFT_REPO_DIR}zabbix/log
 mkdir -p ${OPENSHIFT_REPO_DIR}zabbix/run
 
@@ -36,8 +36,8 @@ EOF_$RANDOM
 echo "Restarting Zabbix Server"
 killall -9 zabbix_server
 sleep 5
-${OPENSHIFT_REPO_DIR}bin/zabbix_server
+${OPENSHIFT_REPO_DIR}bin/zabbix_server -c ${OPENSHIFT_REPO_DIR}zabbix/etc/zabbix_server.conf
 echo "Restarting Zabbix Agent"
 killall -9 zabbix_agentd
 sleep 5
-${OPENSHIFT_REPO_DIR}bin/zabbix_agentd
+${OPENSHIFT_REPO_DIR}bin/zabbix_agentd -c ${OPENSHIFT_REPO_DIR}zabbix/etc/zabbix_agentd.conf
